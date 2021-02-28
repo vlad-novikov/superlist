@@ -4,17 +4,19 @@ import 'package:google_sheets_app/feedback_list.dart';
 import 'controller/form_controller.dart';
 import 'model/form.dart';
 
+import 'package:flutter/services.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Google Sheet Demo',
+      title: 'Заявки супервайзеров',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Google Sheet Demo'),
+      home: MyHomePage(title: 'Заявки супервайзеров'),
     );
   }
 }
@@ -39,7 +41,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   // TextField Controllers
   TextEditingController nameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
+  TextEditingController roomController = TextEditingController();
+  TextEditingController datetimeController = TextEditingController();
   TextEditingController mobileNoController = TextEditingController();
   TextEditingController feedbackController = TextEditingController();
 
@@ -51,23 +54,24 @@ class _MyHomePageState extends State<MyHomePage> {
       // If the form is valid, proceed.
       FeedbackForm feedbackForm = FeedbackForm(
           nameController.text,
-          emailController.text,
+          roomController.text,
+          datetimeController.text,
           mobileNoController.text,
           feedbackController.text);
 
       FormController formController = FormController();
 
-      _showSnackbar("Submitting Feedback");
+      _showSnackbar("Сохраняю заявку");
 
       // Submit 'feedbackForm' and save it in Google Sheets.
       formController.submitForm(feedbackForm, (String response) {
         print("Response: $response");
         if (response == FormController.STATUS_SUCCESS) {
           // Feedback is saved succesfully in Google Sheets.
-          _showSnackbar("Feedback Submitted");
+          _showSnackbar("Заявка сохранена");
         } else {
           // Error Occurred while saving data in Google Sheets.
-          _showSnackbar("Error Occurred!");
+          _showSnackbar("Произошла ошибка!");
         }
       });
     }
@@ -83,7 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      resizeToAvoidBottomPadding: false,
+      //resizeToAvoidBottomPadding: false,
       appBar: AppBar(
         title: Text(widget.title),
       ),
@@ -102,46 +106,67 @@ class _MyHomePageState extends State<MyHomePage> {
                         controller: nameController,
                         validator: (value) {
                           if (value.isEmpty) {
-                            return 'Enter Valid Name';
+                            return 'Введите Имя';
                           }
                           return null;
                         },
-                        decoration: InputDecoration(labelText: 'Name'),
+                        decoration: InputDecoration(labelText: 'Имя'),
                       ),
                       TextFormField(
-                        controller: emailController,
+                        controller: roomController,
                         validator: (value) {
-                          if (!value.contains("@")) {
-                            return 'Enter Valid Email';
-                          }
-                          return null;
-                        },
-                        keyboardType: TextInputType.emailAddress,
-                        decoration: InputDecoration(labelText: 'Email'),
-                      ),
-                      TextFormField(
-                        controller: mobileNoController,
-                        validator: (value) {
-                          if (value.trim().length != 10) {
-                            return 'Enter 10 Digit Mobile Number';
+                          if (value.isEmpty) {
+                            return 'Введите номер комнаты';
                           }
                           return null;
                         },
                         keyboardType: TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(RegExp('[0-9]')),
+                        ],
+                        decoration: InputDecoration(labelText: 'Комната'),
+                      ),
+                      TextFormField(
+                        controller: datetimeController,
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Введите дату';
+                          }
+                          return null;
+                        },
+                        keyboardType: TextInputType.datetime,
+                        decoration: InputDecoration(labelText: 'Дата и Время'),
+                      ),
+
+                      TextFormField(
+                        controller: mobileNoController,
+                        validator: (value) {
+                          //if (value.trim().length != 10) {
+                          //  return 'Enter 10 Digit Mobile Number';
+                          //}
+                          return null;
+                        },
+
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(RegExp('[0-9]')),
+                        ],
+
+
+                        keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                          labelText: 'Mobile Number',
+                          labelText: 'Телефон',
                         ),
                       ),
                       TextFormField(
                         controller: feedbackController,
                         validator: (value) {
                           if (value.isEmpty) {
-                            return 'Enter Valid Feedback';
+                            return 'Введите описание';
                           }
                           return null;
                         },
                         keyboardType: TextInputType.multiline,
-                        decoration: InputDecoration(labelText: 'Feedback'),
+                        decoration: InputDecoration(labelText: 'Описание'),
                       ),
                     ],
                   ),
@@ -150,7 +175,7 @@ class _MyHomePageState extends State<MyHomePage> {
               color: Colors.blue,
               textColor: Colors.white,
               onPressed: _submitForm,
-              child: Text('Submit Feedback'),
+              child: Text('Сохранить'),
             ),
             RaisedButton(
               color: Colors.lightBlueAccent,
@@ -162,7 +187,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       builder: (context) => FeedbackListScreen(),
                     ));
               },
-              child: Text('View Feedback'),
+              child: Text('Просмотреть'),
             ),
           ],
         ),

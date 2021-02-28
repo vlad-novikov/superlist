@@ -55,7 +55,7 @@ class _FeedbackListPageState extends State<FeedbackListPage> {
                 Icon(Icons.person),
                 Expanded(
                   child: Text(
-                      "${feedbackItems[index].name} (${feedbackItems[index].email})"),
+                      "${feedbackItems[index].name} (${feedbackItems[index].room})"),
                 )
               ],
             ),
