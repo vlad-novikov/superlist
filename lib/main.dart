@@ -1,3 +1,4 @@
+// v.novikov@okhtinskaya.com
 import 'package:flutter/material.dart';
 import 'package:google_sheets_app/feedback_list.dart';
 
@@ -5,6 +6,11 @@ import 'controller/form_controller.dart';
 import 'model/form.dart';
 
 import 'package:flutter/services.dart';
+import 'package:date_time_picker/date_time_picker.dart';
+import 'package:toggle_switch/toggle_switch.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+bool isChecked = false;
 
 void main() => runApp(MyApp());
 
@@ -102,7 +108,35 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      TextFormField(
+
+                  DateTimePicker(
+                    controller: datetimeController,
+                    type: DateTimePickerType.dateTimeSeparate,
+                    dateMask: 'd MMM, yyyy',
+                    //initialValue: DateTime.now().toString(),
+                    firstDate: DateTime(2000),
+                    lastDate: DateTime(2100),
+                    icon: Icon(Icons.event),
+                    dateLabelText: 'Дата',
+                    timeLabelText: 'Время',
+                    selectableDayPredicate: (date) {
+                      // Disable weekend days to select from the calendar
+                      //if (date.weekday == 6 || date.weekday == 7) {
+                      //  return false;
+                      //}
+
+                      return true;
+                    },
+                    onChanged: (val) => print(val),
+                    validator: (val) {
+                      print(val);
+                      return null;
+                    },
+                    onSaved: (val) => print(val),
+                  ),
+
+
+                  TextFormField(
                         controller: nameController,
                         validator: (value) {
                           if (value.isEmpty) {
@@ -138,6 +172,38 @@ class _MyHomePageState extends State<MyHomePage> {
                         decoration: InputDecoration(labelText: 'Дата и Время'),
                       ),
 
+                      CheckboxListTile(
+                        title: Text("Двери"),
+                        value: isChecked,
+                        onChanged: (value) {
+                          setState(() {
+                            isChecked = value;
+                          });
+                        },
+                      ),
+                      CheckboxListTile(
+                        title: Text("Окна"),
+                        value: isChecked,
+                        onChanged: (value) {
+                          setState(() {
+                            isChecked = value;
+                          });
+                        },
+                      ),
+
+                      //ToggleSwitch(
+                      //  minWidth: 90.0,
+                      //  cornerRadius: 20.0,
+                      //  activeBgColors: [Colors.green,Colors.red],
+                      //  activeFgColor: Colors.white,
+                      //  inactiveBgColor: Colors.grey,
+                      //  inactiveFgColor: Colors.white,
+                      //  labels: ['ДА', 'НЕТ'],
+                      //  icons: [FontAwesomeIcons.check, FontAwesomeIcons.times],
+                      //  onToggle: (index) {
+                      //    print('switched to: $index');
+                      //  },
+                      //),
                       TextFormField(
                         controller: mobileNoController,
                         validator: (value) {
