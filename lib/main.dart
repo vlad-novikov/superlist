@@ -7,6 +7,7 @@ import 'model/form.dart';
 
 import 'package:flutter/services.dart';
 import 'package:date_time_picker/date_time_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -136,16 +137,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
 
 
-                  TextFormField(
-                        controller: nameController,
-                        validator: (value) {
-                          if (value.isEmpty) {
-                            return 'Введите Имя';
-                          }
-                          return null;
-                        },
-                        decoration: InputDecoration(labelText: 'Имя'),
-                      ),
                       TextFormField(
                         controller: roomController,
                         validator: (value) {
@@ -160,20 +151,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         ],
                         decoration: InputDecoration(labelText: 'Комната'),
                       ),
-                      TextFormField(
-                        controller: datetimeController,
-                        validator: (value) {
-                          if (value.isEmpty) {
-                            return 'Введите дату';
-                          }
-                          return null;
-                        },
-                        keyboardType: TextInputType.datetime,
-                        decoration: InputDecoration(labelText: 'Дата и Время'),
-                      ),
 
                       CheckboxListTile(
-                        title: Text("Двери"),
+                        title: Text("Кафель"),
                         value: isChecked,
                         onChanged: (value) {
                           setState(() {
@@ -181,15 +161,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           });
                         },
                       ),
-                      CheckboxListTile(
-                        title: Text("Окна"),
-                        value: isChecked,
-                        onChanged: (value) {
-                          setState(() {
-                            isChecked = value;
-                          });
-                        },
-                      ),
+
 
                       //ToggleSwitch(
                       //  minWidth: 90.0,
@@ -204,9 +176,9 @@ class _MyHomePageState extends State<MyHomePage> {
                       //    print('switched to: $index');
                       //  },
                       //),
-                      TextFormField(
-                        controller: mobileNoController,
-                        validator: (value) {
+                      /*TextFormField(
+                          controller: mobileNoController,
+                          //validator: (value) {
                           //if (value.trim().length != 10) {
                           //  return 'Enter 10 Digit Mobile Number';
                           //}
@@ -222,17 +194,17 @@ class _MyHomePageState extends State<MyHomePage> {
                         decoration: InputDecoration(
                           labelText: 'Телефон',
                         ),
-                      ),
+                      ),*/
                       TextFormField(
                         controller: feedbackController,
                         validator: (value) {
                           if (value.isEmpty) {
-                            return 'Введите описание';
+                            return 'Введите комментарий';
                           }
                           return null;
                         },
                         keyboardType: TextInputType.multiline,
-                        decoration: InputDecoration(labelText: 'Описание'),
+                        decoration: InputDecoration(labelText: 'Комментарий'),
                       ),
                     ],
                   ),

@@ -1,29 +1,30 @@
+import 'package:date_time_picker/date_time_picker.dart';
+
 /// FeedbackForm is a data class which stores data fields of Feedback.
 class FeedbackForm {
-  String name;
   String room;
   String datetime;
-  String mobileNo;
+  String checkTile;
   String feedback;
 
-  FeedbackForm(this.name, this.room,this.datetime, this.mobileNo, this.feedback);
+  FeedbackForm({this.room,this.checkTile, this.feedback})
+      :
+    datetime = DateFormat.yMd().format(DateTime.now());
 
   factory FeedbackForm.fromJson(dynamic json) {
     return FeedbackForm(
-        "${json['name']}",
         "${json['room']}",
         "${json['datetime']}",
-        "${json['mobileNo']}",
+        "${json['checkTile']}",
         "${json['feedback']}"
     );
   }
 
   // Method to make GET parameters.
   Map toJson() => {
-        'name': name,
         'room': room,
         'datetime': datetime,
-        'mobileNo': mobileNo,
+        'checkTile': checkTile,
         'feedback': feedback
       };
 }
