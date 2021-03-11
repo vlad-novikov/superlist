@@ -12,7 +12,7 @@ import 'package:toggle_switch/toggle_switch.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 bool isChecked = false;
-
+ 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
