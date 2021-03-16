@@ -69,14 +69,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
       FormController formController = FormController();
 
-      _showSnackbar("Сохраняю заявку");
+      _showSnackbar("Сохраняю документ");
 
       // Submit 'feedbackForm' and save it in Google Sheets.
       formController.submitForm(feedbackForm, (String response) {
         print("Response: $response");
         if (response == FormController.STATUS_SUCCESS) {
           // Feedback is saved succesfully in Google Sheets.
-          _showSnackbar("Заявка сохранена");
+          _showSnackbar("Документ сохранен");
         } else {
           // Error Occurred while saving data in Google Sheets.
           _showSnackbar("Произошла ошибка!");
@@ -101,50 +101,19 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             Form(
                 key: _formKey,
                 child: Padding(
-                  padding: EdgeInsets.all(16),
+                  padding: EdgeInsets.all(16.0),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    //crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-
-                  /*
-                  DateTimePicker(
-                    controller: datetimeController,
-                    type: DateTimePickerType.date,
-                    dateMask: 'd MMM, yyyy',
-                    //initialValue: DateTime.now().toString(),
-                    firstDate: DateTime(DateTime.now().year ),
-                    lastDate: DateTime(DateTime.now().year + 1),
-                    icon: Icon(Icons.event),
-                    dateLabelText: 'Дата',
-                    timeLabelText: 'Время',
-                    selectableDayPredicate: (date) {
-                      // Disable weekend days to select from the calendar
-                      //if (date.weekday == 6 || date.weekday == 7) {
-                      //  return false;
-                      //}
-
-                      return true;
-                    },
-                    onChanged: (val) => print(val),
-                    validator: (val) {
-                      print(val);
-                      return null;
-                    },
-                    onSaved: (val) => print(val),
-                  ),
-
-
-                      TextFormField(
-                        controller: datetimeController,
-                        enabled: false,
-                        decoration: InputDecoration(labelText: 'Дата'),
-                      ),
-*/
+                      Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
 
                       TextFormField(
                         controller: roomController,
@@ -161,61 +130,26 @@ class _MyHomePageState extends State<MyHomePage> {
                         decoration: InputDecoration(labelText: 'Комната'),
                       ),
 
-                      CheckboxListTile(
-                        title: Text("Кафель"),
-
-                        value: _isChecked,
-                        onChanged: (value) {
-                          setState(() {
-                            _isChecked = value;
-                          });
-                        },
-                      ),
-
-
-                      //ToggleSwitch(
-                      //  minWidth: 90.0,
-                      //  cornerRadius: 20.0,
-                      //  activeBgColors: [Colors.green,Colors.red],
-                      //  activeFgColor: Colors.white,
-                      //  inactiveBgColor: Colors.grey,
-                      //  inactiveFgColor: Colors.white,
-                      //  labels: ['ДА', 'НЕТ'],
-                      //  icons: [FontAwesomeIcons.check, FontAwesomeIcons.times],
-                      //  onToggle: (index) {
-                      //    print('switched to: $index');
-                      //  },
-                      //),
-                      /*TextFormField(
-                          controller: mobileNoController,
-                          //validator: (value) {
-                          //if (value.trim().length != 10) {
-                          //  return 'Enter 10 Digit Mobile Number';
-                          //}
-                          return null;
-                        },
-
-                        inputFormatters: [
-                          FilteringTextInputFormatter.allow(RegExp('[0-9]')),
-                        ],
-
-
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          labelText: 'Телефон',
+                      Padding(
+                            padding: EdgeInsets.symmetric(vertical: 40.0),
+                            child:
+                        CheckboxListTile(
+                          title: Text("Кафель"),
+                          controlAffinity: ListTileControlAffinity.leading,
+                          value: _isChecked,
+                          onChanged: (value) {
+                            setState(() {
+                              _isChecked = value;
+                            });
+                          },
                         ),
-                      ),*/
+                      ),
                       TextFormField(
                         controller: feedbackController,
-                        validator: (value) {
-                          if (value.isEmpty) {
-                            return 'Введите комментарий';
-                          }
-                          return null;
-                        },
                         keyboardType: TextInputType.multiline,
                         decoration: InputDecoration(labelText: 'Комментарий'),
                       ),
+                      ])
                     ],
                   ),
                 )),
@@ -235,10 +169,15 @@ class _MyHomePageState extends State<MyHomePage> {
                       builder: (context) => FeedbackListScreen(),
                     ));
               },
-              child: Text('Просмотреть'),
+              child: Text('Просмотр'),
             ),
+
+
+
           ],
         ),
+
+
       ),
     );
   }
