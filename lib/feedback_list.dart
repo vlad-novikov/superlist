@@ -7,11 +7,11 @@ class FeedbackListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Feedback Responses',
+        title: 'Список заявок',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: FeedbackListPage(title: "Responses"));
+        home: FeedbackListPage(title: "Заявки"));
   }
 }
 
@@ -55,7 +55,7 @@ class _FeedbackListPageState extends State<FeedbackListPage> {
                 Icon(Icons.person),
                 Expanded(
                   child: Text(
-                      "${feedbackItems[index].name} (${feedbackItems[index].room})"),
+                      "${feedbackItems[index].datetime} (${feedbackItems[index].room})"),
                 )
               ],
             ),

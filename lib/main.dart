@@ -11,7 +11,9 @@ import 'package:intl/intl.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-bool isChecked = false;
+bool _isChecked = false;
+DateTime now = DateTime.now();
+String formattedDate = DateFormat('yyyy-MM-dd – kk:mm').format(now);
  
 void main() => runApp(MyApp());
 
@@ -19,11 +21,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Заявки супервайзеров',
+      title: 'Чек-лист номеров',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Заявки супервайзеров'),
+      home: MyHomePage(title: 'Чек-лист номеров'),
     );
   }
 }
@@ -60,10 +62,9 @@ class _MyHomePageState extends State<MyHomePage> {
     if (_formKey.currentState.validate()) {
       // If the form is valid, proceed.
       FeedbackForm feedbackForm = FeedbackForm(
-          nameController.text,
           roomController.text,
           datetimeController.text,
-          mobileNoController.text,
+          _isChecked.toString(),
           feedbackController.text);
 
       FormController formController = FormController();
@@ -110,13 +111,14 @@ class _MyHomePageState extends State<MyHomePage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
 
+                  /*
                   DateTimePicker(
                     controller: datetimeController,
-                    type: DateTimePickerType.dateTimeSeparate,
+                    type: DateTimePickerType.date,
                     dateMask: 'd MMM, yyyy',
                     //initialValue: DateTime.now().toString(),
-                    firstDate: DateTime(2000),
-                    lastDate: DateTime(2100),
+                    firstDate: DateTime(DateTime.now().year ),
+                    lastDate: DateTime(DateTime.now().year + 1),
                     icon: Icon(Icons.event),
                     dateLabelText: 'Дата',
                     timeLabelText: 'Время',
@@ -138,6 +140,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
                       TextFormField(
+                        controller: datetimeController,
+                        enabled: false,
+                        decoration: InputDecoration(labelText: 'Дата'),
+                      ),
+*/
+
+                      TextFormField(
                         controller: roomController,
                         validator: (value) {
                           if (value.isEmpty) {
@@ -154,10 +163,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
                       CheckboxListTile(
                         title: Text("Кафель"),
-                        value: isChecked,
+
+                        value: _isChecked,
                         onChanged: (value) {
                           setState(() {
-                            isChecked = value;
+                            _isChecked = value;
                           });
                         },
                       ),
