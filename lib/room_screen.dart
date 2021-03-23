@@ -1,7 +1,6 @@
 // v.novikov@okhtinskaya.com
 import 'package:flutter/material.dart';
 import 'package:google_sheets_app/feedback_list.dart';
-import 'package:google_sheets_app/room_screen.dart';
 
 import 'controller/form_controller.dart';
 import 'model/form.dart';
@@ -16,9 +15,9 @@ bool _isChecked = false;
 DateTime now = DateTime.now();
 String formattedDate = DateFormat('yyyy-MM-dd – kk:mm').format(now);
  
-void main() => runApp(MyApp());
+void room_screen() => runApp(RoomScreen());
 
-class MyApp extends StatelessWidget {
+class RoomScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -26,21 +25,21 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Чек-лист номеров'),
+      home: RoomPage(title: 'Чек-лист номеров'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class RoomPage extends StatefulWidget {
+  RoomPage({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _RoomPageState createState() => _RoomPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _RoomPageState extends State<RoomPage> {
   // Create a global key that uniquely identifies the Form widget
   // and allows validation of the form.
   //
@@ -171,18 +170,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     ));
               },
               child: Text('Просмотр'),
-            ),
-            RaisedButton(
-              color: Colors.lightBlueAccent,
-              textColor: Colors.black,
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => RoomScreen(),
-                    ));
-              },
-              child: Text('Чек Номера'),
             ),
 
 
