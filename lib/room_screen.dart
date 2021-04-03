@@ -13,6 +13,7 @@ import 'package:toggle_switch/toggle_switch.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 bool _isChecked = false;
+
 DateTime now = DateTime.now();
 String formattedDate = DateFormat('yyyy-MM-dd – kk:mm').format(now);
  
@@ -51,8 +52,25 @@ class _RoomPageState extends State<RoomPage> {
   final _formKey = GlobalKey<FormState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
+  // set stepper
   int _currentStep = 0;
   StepperType stepperType = StepperType.vertical;
+  static var _focusNode = new FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode.addListener(() {
+      setState(() {});
+      print('Has focus: $_focusNode.hasFocus');
+    });
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
 
   // TextField Controllers
   TextEditingController nameController = TextEditingController();
@@ -109,67 +127,6 @@ class _RoomPageState extends State<RoomPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-
-            Expanded(
-              child: Stepper(
-                type: stepperType,
-                physics: ScrollPhysics(),
-                currentStep: _currentStep,
-                onStepTapped: (step) => tapped(step),
-                onStepContinue:  continued,
-                onStepCancel: cancel,
-                steps: <Step>[
-                  Step(
-                    title: new Text('Account'),
-                    content: Column(
-                      children: <Widget>[
-                        TextFormField(
-                          decoration: InputDecoration(labelText: 'Email Address'),
-                        ),
-                        TextFormField(
-                          decoration: InputDecoration(labelText: 'Password'),
-                        ),
-                      ],
-                    ),
-                    isActive: _currentStep >= 0,
-                    state: _currentStep >= 0 ?
-                    StepState.complete : StepState.disabled,
-                  ),
-                  Step(
-                    title: new Text('Address'),
-                    content: Column(
-                      children: <Widget>[
-                        TextFormField(
-                          decoration: InputDecoration(labelText: 'Home Address'),
-                        ),
-                        TextFormField(
-                          decoration: InputDecoration(labelText: 'Postcode'),
-                        ),
-                      ],
-                    ),
-                    isActive: _currentStep >= 0,
-                    state: _currentStep >= 1 ?
-                    StepState.complete : StepState.disabled,
-                  ),
-                  Step(
-                    title: new Text('Mobile Number'),
-                    content: Column(
-                      children: <Widget>[
-                        TextFormField(
-                          decoration: InputDecoration(labelText: 'Mobile Number'),
-                        ),
-                      ],
-                    ),
-                    isActive:_currentStep >= 0,
-                    state: _currentStep >= 2 ?
-                    StepState.complete : StepState.disabled,
-                  ),
-                ],
-              ),
-            ),
-
-
-
             Form(
                 key: _formKey,
                 child: Padding(
@@ -181,46 +138,53 @@ class _RoomPageState extends State<RoomPage> {
                       Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-
-                      TextFormField(
-                        controller: roomController,
-                        validator: (value) {
-                          if (value.isEmpty) {
-                            return 'Введите номер комнаты';
-                          }
-                          return null;
-                        },
-                        keyboardType: TextInputType.number,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.allow(RegExp('[0-9]')),
-                        ],
-                        decoration: InputDecoration(labelText: 'Комната'),
-                      ),
-
-                      Padding(
-                            padding: EdgeInsets.symmetric(vertical: 40.0),
-                            child:
-                        CheckboxListTile(
-                          title: Text("Кафель"),
-                          controlAffinity: ListTileControlAffinity.leading,
-                          value: _isChecked,
-                          onChanged: (value) {
+                        new Stepper(
+                          steps: steps,
+                          type: StepperType.vertical,
+                          currentStep: this._currentStep,
+                          onStepContinue: () {
                             setState(() {
-                              _isChecked = value;
+                              if (_currentStep < steps.length - 1) {
+                                _currentStep = _currentStep + 1;
+                              } else {
+                                _currentStep = 0;
+                              }
+                              // else {
+                              // Scaffold
+                              //     .of(context)
+                              //     .showSnackBar(new SnackBar(content: new Text('$_currentStep')));
+
+                              // if (_currentStep == 1) {
+                              //   print('First Step');
+                              //   print('object' + FocusScope.of(context).toStringDeep());
+                              // }
+
+                              // }
                             });
                           },
-                        ),
-                      ),
-                      TextFormField(
-                        controller: feedbackController,
-                        keyboardType: TextInputType.multiline,
-                        decoration: InputDecoration(labelText: 'Комментарий'),
-                      ),
+                          onStepCancel: () {
+                            setState(() {
+                              if (_currentStep > 0) {
+                                _currentStep = _currentStep - 1;
+                              } else {
+                                _currentStep = 0;
+                              }
+                            });
+                          },
+                          onStepTapped: (step) {
+                            setState(() {
+                              _currentStep = step;
+                            });
+                          },
+                        )
+
                       ])
                     ],
                   ),
                 )),
-            RaisedButton(
+            //FractionallySizedBox(heightFactor: 1, widthFactor: 0.95,
+                //child: Container(color: Colors.orange)),
+            FlatButton(
               color: Colors.blue,
               textColor: Colors.white,
               onPressed: _submitForm,
@@ -267,5 +231,110 @@ class _RoomPageState extends State<RoomPage> {
     _currentStep > 0 ?
     setState(() => _currentStep -= 1) : null;
   }
+
+  List<Step> steps = [
+    new Step(
+        title: const Text('Входная дверь'),
+        //subtitle: const Text('Enter your name'),
+        isActive: true,
+        //state: StepState.error,
+        state: StepState.indexed,
+        content:
+
+        CheckboxListTile(
+          title: Text("Кафель"),
+          controlAffinity: ListTileControlAffinity.leading,
+          value: _isChecked,
+          onChanged: (value) {
+            setState(() {
+              _isChecked = value;
+            });
+          },
+        ),
+
+    ),
+    new Step(
+        title: const Text('Phone'),
+        //subtitle: const Text('Subtitle'),
+        isActive: true,
+        //state: StepState.editing,
+        state: StepState.indexed,
+        content: new TextFormField(
+          keyboardType: TextInputType.phone,
+          autocorrect: false,
+          validator: (value) {
+            if (value.isEmpty || value.length < 10) {
+              return 'Please enter valid number';
+            }
+          },
+          onSaved: (String value) {
+            //data.phone = value;
+          },
+          maxLines: 1,
+          decoration: new InputDecoration(
+              labelText: 'Enter your number',
+              hintText: 'Enter a number',
+              icon: const Icon(Icons.phone),
+              labelStyle:
+              new TextStyle(decorationStyle: TextDecorationStyle.solid)),
+        )),
+    new Step(
+        title: const Text('Email'),
+        // subtitle: const Text('Subtitle'),
+        isActive: true,
+        state: StepState.indexed,
+        // state: StepState.disabled,
+        content: new TextFormField(
+          keyboardType: TextInputType.emailAddress,
+          autocorrect: false,
+          validator: (value) {
+            if (value.isEmpty || !value.contains('@')) {
+              return 'Please enter valid email';
+            }
+          },
+          onSaved: (String value) {
+            //data.email = value;
+          },
+          maxLines: 1,
+          decoration: new InputDecoration(
+              labelText: 'Enter your email',
+              hintText: 'Enter a email address',
+              icon: const Icon(Icons.email),
+              labelStyle:
+              new TextStyle(decorationStyle: TextDecorationStyle.solid)),
+        )),
+    new Step(
+        title: const Text('Age'),
+        // subtitle: const Text('Subtitle'),
+        isActive: true,
+        state: StepState.indexed,
+        content: new TextFormField(
+          keyboardType: TextInputType.number,
+          autocorrect: false,
+          validator: (value) {
+            if (value.isEmpty || value.length > 2) {
+              return 'Please enter valid age';
+            }
+          },
+          maxLines: 1,
+          onSaved: (String value) {
+            //data.age = value;
+          },
+          decoration: new InputDecoration(
+              labelText: 'Enter your age',
+              hintText: 'Enter age',
+              icon: const Icon(Icons.explicit),
+              labelStyle:
+              new TextStyle(decorationStyle: TextDecorationStyle.solid)),
+        )),
+    // new Step(
+    //     title: const Text('Fifth Step'),
+    //     subtitle: const Text('Subtitle'),
+    //     isActive: true,
+    //     state: StepState.complete,
+    //     content: const Text('Enjoy Step Fifth'))
+  ];
+
+
 
 }
