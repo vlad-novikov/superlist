@@ -100,6 +100,63 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text(
+                'Чек-листы',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.build),
+              title: Text('Чек Техника'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MyApp(),
+                    ));
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.supervisor_account),
+              title: Text('Чек Супера'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => RoomScreen(),
+                    ));
+              },
+
+            ),
+            ListTile(
+              leading: Icon(Icons.view_list),
+              title: Text('Просмотр чеков'),
+
+              onTap: () {
+                // change app state...
+
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => FeedbackListScreen(),
+                    ));
+              },
+
+            ),
+          ],
+        ),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -160,30 +217,8 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: _submitForm,
               child: Text('Сохранить'),
             ),
-            RaisedButton(
-              color: Colors.lightBlueAccent,
-              textColor: Colors.black,
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => FeedbackListScreen(),
-                    ));
-              },
-              child: Text('Просмотр'),
-            ),
-            RaisedButton(
-              color: Colors.lightBlueAccent,
-              textColor: Colors.black,
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => RoomScreen(),
-                    ));
-              },
-              child: Text('Чек Номера'),
-            ),
+
+
 
 
 

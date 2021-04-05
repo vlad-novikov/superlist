@@ -27,6 +27,7 @@ dependencies:
   date_time_picker: "^1.1.1"
   toggle_switch: "^0.1.8"
   font_awesome_flutter: '>= 4.7.0'
+  json_resolve: ^1.0.0
 
 dev_dependencies:
   flutter_test:
