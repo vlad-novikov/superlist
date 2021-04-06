@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_sheets_app/feedback_list.dart';
 import 'package:google_sheets_app/room_screen.dart';
+import 'package:google_sheets_app/drawer.dart';
 
 import 'controller/form_controller.dart';
 import 'model/form.dart';
@@ -9,8 +10,6 @@ import 'model/form.dart';
 import 'package:flutter/services.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:toggle_switch/toggle_switch.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 bool _isChecked = false;
 DateTime now = DateTime.now();
@@ -100,63 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text(
-                'Чек-листы',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                ),
-              ),
-            ),
-            ListTile(
-              leading: Icon(Icons.build),
-              title: Text('Чек Техника'),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => MyApp(),
-                    ));
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.supervisor_account),
-              title: Text('Чек Супера'),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => RoomScreen(),
-                    ));
-              },
-
-            ),
-            ListTile(
-              leading: Icon(Icons.view_list),
-              title: Text('Просмотр чеков'),
-
-              onTap: () {
-                // change app state...
-
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => FeedbackListScreen(),
-                    ));
-              },
-
-            ),
-          ],
-        ),
-      ),
+      drawer: DefaultDrawer(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,

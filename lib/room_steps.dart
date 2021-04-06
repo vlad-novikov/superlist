@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 //import 'package:validate/validate.dart';  //for validation
+import 'package:google_sheets_app/drawer.dart';
 
 void main() {
   runApp(new MyApp());
@@ -30,6 +31,7 @@ class MyAppScreenMode extends State<MyApp> {
           appBar: new AppBar(
             title: new Text('Steppers'),
           ),
+          drawer: DefaultDrawer(),
           body: new StepperBody(),
         ));
   }

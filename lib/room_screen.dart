@@ -5,6 +5,7 @@ import 'package:google_sheets_app/feedback_list.dart';
 import 'controller/form_controller.dart';
 import 'model/form.dart';
 import 'room_steps.dart';
+import 'package:google_sheets_app/drawer.dart';
 
 import 'package:flutter/services.dart';
 import 'package:date_time_picker/date_time_picker.dart';
@@ -223,6 +224,7 @@ class _RoomPageState extends State<RoomPage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
+      drawer: DefaultDrawer(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
