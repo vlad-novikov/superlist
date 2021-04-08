@@ -34,13 +34,13 @@ class SupervisorCheck {
     'Supervisor': Supervisor,
     'datetime': datetime,
     'feedback': feedback,
-    'doorCarpet':doorCarpet,
+    'doorCarpet':doorCarpet.toString(),
     'doorKnob':doorKnob
   };
 }
 
 class Door{
-  String Carpet;
+  bool Carpet = false;
   String Plate;
   String Knob;
   String Leaf;

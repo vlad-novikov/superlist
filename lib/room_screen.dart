@@ -10,8 +10,6 @@ import 'package:google_sheets_app/drawer.dart';
 import 'package:flutter/services.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:toggle_switch/toggle_switch.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 bool _isChecked = false;
 
@@ -126,9 +124,9 @@ class _RoomPageState extends State<RoomPage> {
         //state: StepState.error,
         state: StepState.indexed,
         content: CheckboxListTile(
-          title: Text("Кафель"),
+          title: Text("Ковёр"),
           controlAffinity: ListTileControlAffinity.leading,
-          value: _isChecked,
+          value: Door.Carpet,
           onChanged: (value) {
             setState(() {
               _isChecked = value;
