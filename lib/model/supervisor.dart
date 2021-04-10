@@ -4,42 +4,58 @@ import 'dart:convert';
 /// FeedbackForm is a data class which stores data fields of Feedback.
 
 class SupervisorCheck {
-  String Supervisor;
+  String supervisor;
   String datetime = "2020-01-01";
   String feedback;
 
-  String doorCarpet;
-  String doorKnob;
+  static const String Carpet = "Ковер перед дверью";
+  static const String Plate = "Табличка с номером";
+  static const String Knob = "Дверная ручка";
+  static const String Leaf = "Полотно двери";
+  static const String DoNotDisturb = "Табличка НЕ БЕСПОКОИТЬ";
+  Map door = {
+    Carpet: false,
+    Plate: false,
+    Knob: false,
+    Leaf: false,
+    DoNotDisturb: false
+  };
+
 
 
   //FeedbackForm(this.SupervisorCheck,this.datetime,this.checkTile, this.feedback);
-  SupervisorCheck(this.Supervisor,this.datetime,this.feedback,
-      this.doorCarpet,this.doorKnob);
+  SupervisorCheck(this.supervisor,this.datetime,this.feedback,door[SupervisorCheck.Carpet],door[Plate],door[Knob],door[Leaf],door[DoNotDisturb]);
 
 
   factory SupervisorCheck.fromJson(dynamic json) {
 
     //var curdatetime = DateFormat.yMd().format(DateTime.now());
     return SupervisorCheck(
-        "${json['Supervisor']}",
+        "${json['supervisor']}",
         "${json['datetime']}",
         "${json['feedback']}",
         "${json['doorCarpet']}",
-        "${json['doorKnob']}"
+        "${json['doorPlate']}",
+        "${json['doorKnob']}",
+        "${json['doorLeaf']}",
+        "${json['doorDoNotDisturb']}"
     );
   }
 
   // Method to make GET parameters.
   Map toJson() => {
-    'Supervisor': Supervisor,
+    'Supervisor': supervisor,
     'datetime': datetime,
     'feedback': feedback,
-    'doorCarpet':doorCarpet.toString(),
-    'doorKnob':doorKnob
+    'doorCarpet':door[Carpet],
+    'doorPlate':door[Plate],
+    'doorKnob':door[Knob],
+    'doorLeaf':door[Leaf],
+    'doorDoNotDisturb':door[DoNotDisturb],
   };
 }
 
-class Door{
+class Door1{
   bool Carpet = false;
   String Plate;
   String Knob;
