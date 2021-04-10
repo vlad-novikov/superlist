@@ -7,38 +7,81 @@ class SupervisorCheck {
   String supervisor;
   String datetime = "2020-01-01";
   String feedback;
+  // door area elements
+  String doorCarpet;
+  String doorPlate;
+  String doorKnob;
+  String doorLeaf;
+  String doorDoNotDisturb;
+  // passage area elements
+  String passageCarpet;
+  String passageBaseBoard;
+  String passageWalls;
+  String passageCeiling;
+  // bath area elements
+  String bathDoor;
+  String bathKnob;
+  String bathSink;
+  String bathDrain;
+  String bathTile;
+  // wardrobe area
+  String wardrobeShelves;
+  String wardrobeLaundryReceipt;
+  String wardrobeShoeHorn;
+  String wardrobeHangers;
+  String wardrobeLuggageRack;
+  // LivingRoom area elements
+  String livingRoomWalls;
+  String livingRoomConditioner;
+  String livingRoomCarpet;
+  String livingRoomWindow;
+  String livingRoomCurtains;
+  String livingRoomTv;
 
-  static const String Carpet = "Ковер перед дверью";
-  static const String Plate = "Табличка с номером";
-  static const String Knob = "Дверная ручка";
-  static const String Leaf = "Полотно двери";
-  static const String DoNotDisturb = "Табличка НЕ БЕСПОКОИТЬ";
-  Map door = {
-    Carpet: false,
-    Plate: false,
-    Knob: false,
-    Leaf: false,
-    DoNotDisturb: false
-  };
-
-
-
-  //FeedbackForm(this.SupervisorCheck,this.datetime,this.checkTile, this.feedback);
-  SupervisorCheck(this.supervisor,this.datetime,this.feedback,door[SupervisorCheck.Carpet],door[Plate],door[Knob],door[Leaf],door[DoNotDisturb]);
-
+  SupervisorCheck(this.supervisor,this.datetime,this.feedback,
+      this.doorCarpet,this.doorPlate,this.doorKnob,this.doorLeaf,this.doorDoNotDisturb,
+      this.passageBaseBoard,this.passageCarpet,this.passageCeiling,this.passageWalls,
+      this.bathDoor,this.bathDrain,this.bathKnob,this.bathSink,this.bathTile,
+      this.wardrobeHangers,this.wardrobeLaundryReceipt,this.wardrobeLuggageRack,this.wardrobeShelves,this.wardrobeShoeHorn,
+      this.livingRoomCarpet,this.livingRoomConditioner,this.livingRoomCurtains,this.livingRoomTv,this.livingRoomWalls,this.livingRoomWindow);
 
   factory SupervisorCheck.fromJson(dynamic json) {
-
     //var curdatetime = DateFormat.yMd().format(DateTime.now());
     return SupervisorCheck(
         "${json['supervisor']}",
         "${json['datetime']}",
         "${json['feedback']}",
+
         "${json['doorCarpet']}",
         "${json['doorPlate']}",
         "${json['doorKnob']}",
         "${json['doorLeaf']}",
-        "${json['doorDoNotDisturb']}"
+        "${json['doDoNotDisturb']}",
+
+        "${json['passageBaseBoard,']}",
+        "${json['passageCarpet']}",
+        "${json['passageCeiling,']}",
+        "${json['passageWalls']}",
+
+        "${json['bathDoor']}",
+        "${json['bathDrain']}",
+        "${json['bathKnob']}",
+        "${json['bathSink']}",
+        "${json['bathTile']}",
+
+        "${json['wardrobeHangers']}",
+        "${json['wardrobeLaundryReceipt']}",
+        "${json['wardrobeLuggageRack']}",
+        "${json['wardrobeShelves']}",
+        "${json['wardrobeShoeHorn']}",
+
+        "${json['livingRoomCarpet']}",
+        "${json['livingRoomConditioner']}",
+        "${json['livingRoomCurtains']}",
+        "${json['livingRoomTv']}",
+        "${json['livingRoomWalls']}",
+        "${json['livingRoomWindow']}"
+
     );
   }
 
@@ -47,51 +90,37 @@ class SupervisorCheck {
     'Supervisor': supervisor,
     'datetime': datetime,
     'feedback': feedback,
-    'doorCarpet':door[Carpet],
-    'doorPlate':door[Plate],
-    'doorKnob':door[Knob],
-    'doorLeaf':door[Leaf],
-    'doorDoNotDisturb':door[DoNotDisturb],
+
+    'doorCarpet':doorCarpet,
+    'doorPlate':doorPlate,
+    'doorKnob':doorKnob,
+    'doorLeaf':doorLeaf,
+    'doorDoNotDisturb':doorDoNotDisturb,
+
+    'passageCarpet': passageCarpet,
+    'passageBaseBoard':passageBaseBoard,
+    'passageWalls': passageWalls,
+    'passageWalls': passageCeiling,
+
+    'bathDoor': bathDoor,
+    'bathKnob': bathKnob,
+    'bathSink': bathSink,
+    'bathDrain': bathDrain,
+    'bathTile': bathTile,
+  
+    'wardrobeShelves': wardrobeShelves,
+    'wardrobeLaundryReceipt': wardrobeLaundryReceipt,
+    'wardrobeShoeHorn': wardrobeShoeHorn,
+    'wardrobeHangers': wardrobeHangers,
+    'wardrobeLuggageRack': wardrobeLuggageRack,
+
+    'livingRoomWalls': livingRoomWalls,
+    'livingRoomConditioner': livingRoomConditioner,
+    'livingRoomCarpet': livingRoomCarpet,
+    'livingRoomWindow,': livingRoomWindow,
+    'livingRoomCurtains': livingRoomCurtains,
+    'livingRoomTv': livingRoomTv,
+
   };
 }
 
-class Door1{
-  bool Carpet = false;
-  String Plate;
-  String Knob;
-  String Leaf;
-  String DoNotDisturb;
-}
-
-class Passage{
-  String Carpet;
-  String BaseBoard;
-  String Walls;
-  String Ceiling;
-}
-
-class Bathroom {
-  String Door;
-  String Knob;
-  String Sink;
-  String Drain;
-  String Tile;
-}
-
-class Wardrobe {
-  String Shelves;
-  String LaundryReceipt;
-  String ShoeHorn;
-  String Hangers;
-  String LuggageRack;
-}
-
-class LivingRoom {
-
-  String Walls;
-  String Conditioner;
-  String Carpet;
-  String Windows;
-  String Curtains;
-  String Tv;
-}

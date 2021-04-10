@@ -2,9 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_sheets_app/feedback_list.dart';
 
-import 'controller/form_controller.dart';
-import 'model/form.dart';
-import 'room_steps.dart';
+import 'controller/supervisor_controller.dart';
+import 'model/supervisor.dart';
 import 'package:google_sheets_app/drawer.dart';
 
 import 'package:flutter/services.dart';
@@ -13,12 +12,43 @@ import 'package:intl/intl.dart';
 
 bool _isChecked = false;
 
+// door area elements
+bool _doorCarpet = false;
+bool _doorPlate = false;
+bool _doorKnob = false;
+bool _doorLeaf = false;
+bool _doorDoNotDisturb = false;
+// passage area elements
+bool _passageCarpet = false;
+bool _passageBaseBoard = false;
+bool _passageWalls = false;
+bool _passageCeiling = false;
+// bath area elements
+bool _bathDoor = false;
+bool _bathKnob = false;
+bool _bathSink = false;
+bool _bathDrain = false;
+bool _bathTile = false;
+// wardrobe area
+bool _wardrobeShelves = false;
+bool _wardrobeLaundryReceipt = false;
+bool _wardrobeShoeHorn = false;
+bool _wardrobeHangers = false;
+bool _wardrobeLuggageRack = false;
+// LivingRoom area elements
+bool _livingRoomWalls = false;
+bool _livingRoomConditioner = false;
+bool _livingRoomCarpet = false;
+bool _livingRoomWindow = false;
+bool _livingRoomCurtains = false;
+bool _livingRoomTv = false;
+
 DateTime now = DateTime.now();
 String formattedDate = DateFormat('yyyy-MM-dd – kk:mm').format(now);
 
-void room_screen() => runApp(RoomScreen());
+void supervisor_screen() => runApp(SupervisorScreen());
 
-class RoomScreen extends StatelessWidget {
+class SupervisorScreen extends StatelessWidget {
   int _currentStep = 0;
   StepperType stepperType = StepperType.vertical;
   @override
@@ -28,21 +58,21 @@ class RoomScreen extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: RoomPage(title: 'Чек-лист номеров'),
+      home: SupervisorPage(title: 'Чек-лист номеров'),
     );
   }
 }
 
-class RoomPage extends StatefulWidget {
-  RoomPage({Key key, this.title}) : super(key: key);
+class SupervisorPage extends StatefulWidget {
+  SupervisorPage({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _RoomPageState createState() => _RoomPageState();
+  _SupervisorPageState createState() => _SupervisorPageState();
 }
 
-class _RoomPageState extends State<RoomPage> {
+class _SupervisorPageState extends State<SupervisorPage> {
   // Create a global key that uniquely identifies the Form widget
   // and allows validation of the form.
   //
@@ -75,7 +105,6 @@ class _RoomPageState extends State<RoomPage> {
   TextEditingController nameController = TextEditingController();
   TextEditingController roomController = TextEditingController();
   TextEditingController datetimeController = TextEditingController();
-  TextEditingController mobileNoController = TextEditingController();
   TextEditingController feedbackController = TextEditingController();
 
   // Method to Submit Feedback and save it in Google Sheets
@@ -84,20 +113,49 @@ class _RoomPageState extends State<RoomPage> {
     // otherwise.
     if (_formKey.currentState.validate()) {
       // If the form is valid, proceed.
-      FeedbackForm feedbackForm = FeedbackForm(
+      SupervisorCheck supervisorCheck = SupervisorCheck(
           roomController.text,
           datetimeController.text,
-          _isChecked.toString(),
-          feedbackController.text);
+          feedbackController.text,
+          _doorCarpet.toString(),
+          _doorPlate.toString(),
+        _doorKnob.toString(),
+       _doorLeaf.toString(),
+       _doorDoNotDisturb.toString(),
+// passage area elements
+       _passageCarpet.toString(),
+       _passageBaseBoard.toString(),
+       _passageWalls.toString(),
+       _passageCeiling.toString(),
+// bath area elements
+       _bathDoor.toString(),
+       _bathKnob.toString(),
+       _bathSink.toString(),
+       _bathDrain.toString(),
+       _bathTile.toString(),
+// wardrobe area
+       _wardrobeShelves.toString(),
+       _wardrobeLaundryReceipt.toString(),
+       _wardrobeShoeHorn.toString(),
+       _wardrobeHangers.toString(),
+       _wardrobeLuggageRack.toString(),
+// LivingRoom area elements
+       _livingRoomWalls.toString(),
+       _livingRoomConditioner.toString(),
+       _livingRoomCarpet.toString(),
+       _livingRoomWindow.toString(),
+       _livingRoomCurtains.toString(),
+       _livingRoomTv.toString()
+      );
 
-      FormController formController = FormController();
+      SupervisorController supervisorController = SupervisorController();
 
       _showSnackbar("Сохраняю документ");
 
-      // Submit 'feedbackForm' and save it in Google Sheets.
-      formController.submitForm(feedbackForm, (String response) {
+      // Submit 'SupervisorCheck' and save it in Google Sheets.
+      supervisorController.submitForm(supervisorCheck, (String response) {
         print("Response: $response");
-        if (response == FormController.STATUS_SUCCESS) {
+        if (response == SupervisorController.STATUS_SUCCESS) {
           // Feedback is saved succesfully in Google Sheets.
           _showSnackbar("Документ сохранен");
         } else {
@@ -123,42 +181,67 @@ class _RoomPageState extends State<RoomPage> {
         isActive: true,
         //state: StepState.error,
         state: StepState.indexed,
-        content: CheckboxListTile(
-          title: Text("Ковёр"),
-          controlAffinity: ListTileControlAffinity.leading,
-          value: Door.Carpet,
-          onChanged: (value) {
-            setState(() {
-              _isChecked = value;
-            });
-          },
-        ),
+        content:
+          Column(
+            children: <Widget>[
+              CheckboxListTile(
+                title: Text("Ковёр перед дверью"),
+                controlAffinity: ListTileControlAffinity.leading,
+                value: _doorCarpet,
+                onChanged: (value) {
+                  setState(() {
+                  _doorCarpet = value;
+                    });
+                },
+              ),
+              CheckboxListTile(
+                title: Text("Табличка с номером"),
+                controlAffinity: ListTileControlAffinity.leading,
+                value: _doorPlate,
+                onChanged: (value) {
+                  setState(() {
+                    _doorPlate = value;
+                  });
+                },
+              ),
+
+              ],
+          ),
       ),
       new Step(
-          title: const Text('Phone'),
+          title: const Text('Коридор'),
           //subtitle: const Text('Subtitle'),
           isActive: true,
           //state: StepState.editing,
           state: StepState.indexed,
-          content: new TextFormField(
-            keyboardType: TextInputType.phone,
-            autocorrect: false,
-            validator: (value) {
-              if (value.isEmpty || value.length < 10) {
-                return 'Please enter valid number';
-              }
-            },
-            onSaved: (String value) {
-              //data.phone = value;
-            },
-            maxLines: 1,
-            decoration: new InputDecoration(
-                labelText: 'Enter your number',
-                hintText: 'Enter a number',
-                icon: const Icon(Icons.phone),
-                labelStyle:
-                    new TextStyle(decorationStyle: TextDecorationStyle.solid)),
-          )),
+          content:
+          Column(
+            children: <Widget>[
+              CheckboxListTile(
+                title: Text("Ковёр перед дверью"),
+                controlAffinity: ListTileControlAffinity.leading,
+                value: _doorCarpet,
+                onChanged: (value) {
+                  setState(() {
+                    _doorCarpet = value;
+                  });
+                },
+              ),
+              CheckboxListTile(
+                title: Text("Плинтус в порядке"),
+                controlAffinity: ListTileControlAffinity.leading,
+                value: _passageBaseBoard,
+                onChanged: (value) {
+                  setState(() {
+                    _passageBaseBoard = value;
+                  });
+                },
+              ),
+
+            ],
+          ),
+
+      ),
       new Step(
           title: const Text('Email'),
           // subtitle: const Text('Subtitle'),

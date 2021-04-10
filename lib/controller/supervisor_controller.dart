@@ -2,11 +2,11 @@ import 'dart:convert' as convert;
 
 import 'package:http/http.dart' as http;
 
-import '../model/form.dart';
+import '../model/supervisor.dart';
 
 /// FormController is a class which does work of saving FeedbackForm in Google Sheets using
 /// HTTP GET request on Google App Script Web URL and parses response and sends result callback.
-class FormController {
+class SupervisorController {
   // Google App Script Web URL.
   static const String URL =
       "https://script.google.com/macros/s/AKfycbw7zu3J0U0m5MiuGZU4J5cUG4fgQfEb5kkD5-LqRNivn2FbUjwx/exec";
@@ -18,9 +18,9 @@ class FormController {
   /// Async function which saves feedback, parses [feedbackForm] parameters
   /// and sends HTTP GET request on [URL]. On successful response, [callback] is called.
   void submitForm(
-      FeedbackForm feedbackForm, void Function(String) callback) async {
+      SupervisorCheck supervisorCheck, void Function(String) callback) async {
     try {
-      await http.post(URL, body: feedbackForm.toJson()).then((response) async {
+      await http.post(URL, body: supervisorCheck.toJson()).then((response) async {
         if (response.statusCode == 302) {
           var url = response.headers['location'];
           await http.get(url).then((response) {
@@ -36,10 +36,10 @@ class FormController {
   }
 
   /// Async function which loads feedback from endpoint URL and returns List.
-  Future<List<FeedbackForm>> getFeedbackList() async {
+  Future<List<SupervisorCheck>> getFeedbackList() async {
     return await http.get(URL).then((response) {
       var jsonFeedback = convert.jsonDecode(response.body) as List;
-      return jsonFeedback.map((json) => FeedbackForm.fromJson(json)).toList();
+      return jsonFeedback.map((json) => SupervisorCheck.fromJson(json)).toList();
     });
   }
 }
