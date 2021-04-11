@@ -14,10 +14,10 @@ import 'package:intl/intl.dart';
 bool _isChecked = false;
 DateTime now = DateTime.now();
 String formattedDate = DateFormat('yyyy-MM-dd – kk:mm').format(now);
- 
-void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+void tech_screen() => runApp(TechScreen());
+
+class TechScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

@@ -46,7 +46,7 @@ bool _livingRoomTv = false;
 DateTime now = DateTime.now();
 String formattedDate = DateFormat('yyyy-MM-dd – kk:mm').format(now);
 
-void supervisor_screen() => runApp(SupervisorScreen());
+void main() => runApp(SupervisorScreen());
 
 class SupervisorScreen extends StatelessWidget {
   int _currentStep = 0;
@@ -54,11 +54,11 @@ class SupervisorScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Чек-лист номеров',
+      title: 'Чек-лист супервайзера',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: SupervisorPage(title: 'Чек-лист номеров'),
+      home: SupervisorPage(title: 'Чек-лист супервайзера'),
     );
   }
 }
@@ -175,6 +175,41 @@ class _SupervisorPageState extends State<SupervisorPage> {
   @override
   Widget build(BuildContext context) {
     List<Step> steps = [
+
+      new Step(
+          title: const Text('Общие данные'),
+          // subtitle: const Text('Subtitle'),
+          isActive: true,
+          state: StepState.indexed,
+          // state: StepState.disabled,
+          content:
+          Column(
+              children: <Widget>[
+                TextFormField(
+                  controller: roomController,
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Введите номер комнаты';
+                    }
+                    return null;
+                  },
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp('[0-9]')),
+                  ],
+                  decoration: InputDecoration(labelText: '№ комнаты'),
+                ),
+                TextFormField(
+                  controller: feedbackController,
+                  keyboardType: TextInputType.multiline,
+                  decoration: InputDecoration(labelText: 'Горничная'),
+                ),
+              ]
+          )
+
+      ),
+
+
       new Step(
         title: const Text('Входная дверь'),
         //subtitle: const Text('Enter your name'),
@@ -291,7 +326,7 @@ class _SupervisorPageState extends State<SupervisorPage> {
 
       ),
       new Step(
-          title: const Text('Ванна'),
+          title: const Text('Ванная'),
           // subtitle: const Text('Subtitle'),
           isActive: true,
           state: StepState.indexed,
@@ -552,12 +587,12 @@ class _SupervisorPageState extends State<SupervisorPage> {
                               (BuildContext context, {VoidCallback onStepContinue, VoidCallback onStepCancel}) {
                                 return Row(
                                   children: <Widget>[
-                                    FlatButton(
+                                    /* FlatButton(
                                       onPressed: onStepContinue,
                                       child: const Text('Далее'),
                                       color: Colors.blue,
                                       textColor: Colors.white,
-                                      ),
+                                      ), */
                                     /*FlatButton(
                                       onPressed: onStepCancel,
                                       child: const Text('Отмена'),

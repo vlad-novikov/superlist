@@ -87,7 +87,7 @@ class SupervisorCheck {
 
   // Method to make GET parameters.
   Map toJson() => {
-    'Supervisor': supervisor,
+    'supervisor': supervisor,
     'datetime': datetime,
     'feedback': feedback,
 
@@ -100,7 +100,7 @@ class SupervisorCheck {
     'passageCarpet': passageCarpet,
     'passageBaseBoard':passageBaseBoard,
     'passageWalls': passageWalls,
-    'passageWalls': passageCeiling,
+    'passageCeiling': passageCeiling,
 
     'bathDoor': bathDoor,
     'bathKnob': bathKnob,
