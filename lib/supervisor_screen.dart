@@ -185,7 +185,7 @@ class _SupervisorPageState extends State<SupervisorPage> {
           Column(
             children: <Widget>[
               CheckboxListTile(
-                title: Text("Ковёр перед дверью"),
+                title: Text("Ковёр"),
                 controlAffinity: ListTileControlAffinity.leading,
                 value: _doorCarpet,
                 onChanged: (value) {
@@ -204,12 +204,41 @@ class _SupervisorPageState extends State<SupervisorPage> {
                   });
                 },
               ),
-
+              CheckboxListTile(
+                title: Text("Дверная ручка"),
+                controlAffinity: ListTileControlAffinity.leading,
+                value: _doorKnob,
+                onChanged: (value) {
+                  setState(() {
+                    _doorKnob = value;
+                  });
+                },
+              ),
+              CheckboxListTile(
+                title: Text("Дверное полотно"),
+                controlAffinity: ListTileControlAffinity.leading,
+                value: _doorLeaf,
+                onChanged: (value) {
+                  setState(() {
+                    _doorLeaf = value;
+                  });
+                },
+              ),
+              CheckboxListTile(
+                title: Text("Табличка Не Беспокоить"),
+                controlAffinity: ListTileControlAffinity.leading,
+                value: _doorDoNotDisturb,
+                onChanged: (value) {
+                  setState(() {
+                    _doorDoNotDisturb = value;
+                  });
+                },
+              ),
               ],
           ),
       ),
       new Step(
-          title: const Text('Коридор'),
+          title: const Text('Прихожая'),
           //subtitle: const Text('Subtitle'),
           isActive: true,
           //state: StepState.editing,
@@ -218,17 +247,17 @@ class _SupervisorPageState extends State<SupervisorPage> {
           Column(
             children: <Widget>[
               CheckboxListTile(
-                title: Text("Ковёр перед дверью"),
+                title: Text("Ковёр"),
                 controlAffinity: ListTileControlAffinity.leading,
-                value: _doorCarpet,
+                value: _passageCarpet,
                 onChanged: (value) {
                   setState(() {
-                    _doorCarpet = value;
+                    _passageCarpet = value;
                   });
                 },
               ),
               CheckboxListTile(
-                title: Text("Плинтус в порядке"),
+                title: Text("Плинтус"),
                 controlAffinity: ListTileControlAffinity.leading,
                 value: _passageBaseBoard,
                 onChanged: (value) {
@@ -237,66 +266,225 @@ class _SupervisorPageState extends State<SupervisorPage> {
                   });
                 },
               ),
-
+              CheckboxListTile(
+                title: Text("Стены"),
+                controlAffinity: ListTileControlAffinity.leading,
+                value: _passageWalls,
+                onChanged: (value) {
+                  setState(() {
+                    _passageCeiling = value;
+                  });
+                },
+              ),
+              CheckboxListTile(
+                title: Text("Потолок"),
+                controlAffinity: ListTileControlAffinity.leading,
+                value: _passageCeiling,
+                onChanged: (value) {
+                  setState(() {
+                    _passageCeiling = value;
+                  });
+                },
+              ),
             ],
           ),
 
       ),
       new Step(
-          title: const Text('Email'),
+          title: const Text('Ванна'),
           // subtitle: const Text('Subtitle'),
           isActive: true,
           state: StepState.indexed,
           // state: StepState.disabled,
-          content: new TextFormField(
-            keyboardType: TextInputType.emailAddress,
-            autocorrect: false,
-            validator: (value) {
-              if (value.isEmpty || !value.contains('@')) {
-                return 'Please enter valid email';
-              }
-            },
-            onSaved: (String value) {
-              //data.email = value;
-            },
-            maxLines: 1,
-            decoration: new InputDecoration(
-                labelText: 'Enter your email',
-                hintText: 'Enter a email address',
-                icon: const Icon(Icons.email),
-                labelStyle:
-                    new TextStyle(decorationStyle: TextDecorationStyle.solid)),
-          )),
+          content:
+            Column(
+              children: <Widget>[
+                CheckboxListTile(
+                  title: Text("Дверь"),
+                  controlAffinity: ListTileControlAffinity.leading,
+                  value: _bathDoor,
+                  onChanged: (value) {
+                    setState(() {
+                      _bathDoor = value;
+                    });
+                  },
+                ),
+                CheckboxListTile(
+                  title: Text("Дверная ручка"),
+                  controlAffinity: ListTileControlAffinity.leading,
+                  value: _bathKnob,
+                  onChanged: (value) {
+                    setState(() {
+                      _bathKnob = value;
+                    });
+                  },
+                ),
+                CheckboxListTile(
+                  title: Text("Раковина"),
+                  controlAffinity: ListTileControlAffinity.leading,
+                  value: _bathSink,
+                  onChanged: (value) {
+                    setState(() {
+                      _bathSink = value;
+                    });
+                  },
+                ),
+                CheckboxListTile(
+                  title: Text("Слив"),
+                  controlAffinity: ListTileControlAffinity.leading,
+                  value: _bathDrain,
+                  onChanged: (value) {
+                    setState(() {
+                      _bathDrain = value;
+                    });
+                  },
+                ),
+                CheckboxListTile(
+                  title: Text("Плитка"),
+                  controlAffinity: ListTileControlAffinity.leading,
+                  value: _bathTile,
+                  onChanged: (value) {
+                    setState(() {
+                      _bathTile = value;
+                    });
+                  },
+                ),
+              ]
+            )
+
+      ),
       new Step(
-          title: const Text('Age'),
+          title: const Text('Гардероб'),
           // subtitle: const Text('Subtitle'),
           isActive: true,
           state: StepState.indexed,
-          content: new TextFormField(
-            keyboardType: TextInputType.number,
-            autocorrect: false,
-            validator: (value) {
-              if (value.isEmpty || value.length > 2) {
-                return 'Please enter valid age';
-              }
-            },
-            maxLines: 1,
-            onSaved: (String value) {
-              //data.age = value;
-            },
-            decoration: new InputDecoration(
-                labelText: 'Enter your age',
-                hintText: 'Enter age',
-                icon: const Icon(Icons.explicit),
-                labelStyle:
-                    new TextStyle(decorationStyle: TextDecorationStyle.solid)),
-          )),
-      // new Step(
-      //     title: const Text('Fifth Step'),
-      //     subtitle: const Text('Subtitle'),
-      //     isActive: true,
-      //     state: StepState.complete,
-      //     content: const Text('Enjoy Step Fifth'))
+          content:
+          Column(
+            children: <Widget>[
+              CheckboxListTile(
+                title: Text("Вешалки"),
+                controlAffinity: ListTileControlAffinity.leading,
+                value: _wardrobeHangers,
+                onChanged: (value) {
+                  setState(() {
+                    _wardrobeHangers = value;
+                  });
+                },
+              ),
+              CheckboxListTile(
+                title: Text("Квитанция прачечной"),
+                controlAffinity: ListTileControlAffinity.leading,
+                value: _wardrobeLaundryReceipt,
+                onChanged: (value) {
+                  setState(() {
+                    _wardrobeLaundryReceipt = value;
+                  });
+                },
+              ),
+              CheckboxListTile(
+                title: Text("Рожок"),
+                controlAffinity: ListTileControlAffinity.leading,
+                value: _wardrobeShoeHorn,
+                onChanged: (value) {
+                  setState(() {
+                    _wardrobeShoeHorn = value;
+                  });
+                },
+              ),
+              CheckboxListTile(
+                title: Text("Полки"),
+                controlAffinity: ListTileControlAffinity.leading,
+                value: _wardrobeShelves,
+                onChanged: (value) {
+                  setState(() {
+                    _wardrobeShelves = value;
+                  });
+                },
+              ),
+              CheckboxListTile(
+                title: Text("Багажная ниша"),
+                controlAffinity: ListTileControlAffinity.leading,
+                value: _wardrobeLuggageRack,
+                onChanged: (value) {
+                  setState(() {
+                    _wardrobeLuggageRack = value;
+                  });
+                },
+              ),
+            ]
+          )
+    ),
+      new Step(
+          title: const Text('Жилая комната'),
+          // subtitle: const Text('Subtitle'),
+          isActive: true,
+          state: StepState.indexed,
+          content:
+          Column(
+              children: <Widget>[
+                CheckboxListTile(
+                  title: Text("Ковёр"),
+                  controlAffinity: ListTileControlAffinity.leading,
+                  value: _livingRoomCarpet,
+                  onChanged: (value) {
+                    setState(() {
+                      _livingRoomCarpet = value;
+                    });
+                  },
+                ),
+                CheckboxListTile(
+                  title: Text("Кондиционер"),
+                  controlAffinity: ListTileControlAffinity.leading,
+                  value: _livingRoomConditioner,
+                  onChanged: (value) {
+                    setState(() {
+                      _livingRoomConditioner = value;
+                    });
+                  },
+                ),
+                CheckboxListTile(
+                  title: Text("Телевизор"),
+                  controlAffinity: ListTileControlAffinity.leading,
+                  value: _livingRoomTv,
+                  onChanged: (value) {
+                    setState(() {
+                      _livingRoomTv = value;
+                    });
+                  },
+                ),
+                CheckboxListTile(
+                  title: Text("Стены"),
+                  controlAffinity: ListTileControlAffinity.leading,
+                  value: _livingRoomWalls,
+                  onChanged: (value) {
+                    setState(() {
+                      _livingRoomWalls = value;
+                    });
+                  },
+                ),
+                CheckboxListTile(
+                  title: Text("Занавески"),
+                  controlAffinity: ListTileControlAffinity.leading,
+                  value: _livingRoomCurtains,
+                  onChanged: (value) {
+                    setState(() {
+                      _livingRoomCurtains = value;
+                    });
+                  },
+                ),
+                CheckboxListTile(
+                  title: Text("Окно"),
+                  controlAffinity: ListTileControlAffinity.leading,
+                  value: _livingRoomWindow,
+                  onChanged: (value) {
+                    setState(() {
+                      _livingRoomWindow = value;
+                    });
+                  },
+                ),
+              ]
+          )
+      ),
     ];
 
     return Scaffold(
@@ -306,7 +494,8 @@ class _SupervisorPageState extends State<SupervisorPage> {
         title: Text(widget.title),
       ),
       drawer: DefaultDrawer(),
-      body: Center(
+      body:  SingleChildScrollView(
+        child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
@@ -359,8 +548,28 @@ class _SupervisorPageState extends State<SupervisorPage> {
                                   _currentStep = step;
                                 });
                               },
+                            controlsBuilder:
+                              (BuildContext context, {VoidCallback onStepContinue, VoidCallback onStepCancel}) {
+                                return Row(
+                                  children: <Widget>[
+                                    FlatButton(
+                                      onPressed: onStepContinue,
+                                      child: const Text('Далее'),
+                                      color: Colors.blue,
+                                      textColor: Colors.white,
+                                      ),
+                                    /*FlatButton(
+                                      onPressed: onStepCancel,
+                                      child: const Text('Отмена'),
+                                      color: Colors.blue,
+                                      textColor: Colors.white,
+                                      ),*/
+                                ],
+                              );
+                            }
                             )
-                          ])
+
+                      ])
                     ],
                   ),
                 )),
@@ -387,6 +596,7 @@ class _SupervisorPageState extends State<SupervisorPage> {
           ],
         ),
       ),
+    ),
     );
   }
 
