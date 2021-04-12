@@ -153,8 +153,10 @@ class _SupervisorPageState extends State<SupervisorPage> {
       //_showSnackbar("doorPlate="+supervisorCheck.doorPlate.toString());
       // Submit 'SupervisorCheck' and save it in Google Sheets.
       supervisorController.submitForm(supervisorCheck, (String response) {
-        print("Response: $response");
-        //print(supervisorCheck.doorPlate.toString());
+        print("******** Submitted ********");
+        print(supervisorCheck.toString());
+        print("****************************");
+        print("Response is $response");
         if (response == SupervisorController.STATUS_SUCCESS) {
           // Feedback is saved succesfully in Google Sheets.
           _showSnackbar("Чек-лист сохранен");

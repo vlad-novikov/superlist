@@ -19,18 +19,15 @@ class SupervisorController {
   void submitForm(
       SupervisorCheck supervisorCheck, void Function(String) callback) async {
     try {
+      print(" ");
       print("On submit doorPlate="+supervisorCheck.doorPlate.toString());
       print("On submit JSON="+supervisorCheck.toJson().toString());
       await http.post(URL, body: supervisorCheck.toJson()).then((response) async {
-        print("status Code = "+ response.statusCode.toString());
+        //print("status Code = "+ response.statusCode.toString());
         //print("location = "+ response.headers['location'].toString());
         if (response.statusCode == 302) {
           var url = response.headers['location'];
           await http.get(url).then((response) {
-            print("after redirect status Code = "+ response.statusCode.toString());
-            //print("after redirect status  = "+ convert.jsonDecode(response.body)['status']);
-            print("after redirect headers  = "+ response.headers.values.toString());
-            print("after redirect body  = "+ convert.jsonDecode(response.body).toString());
             callback(convert.jsonDecode(response.body)['status']);
           });
         } else {

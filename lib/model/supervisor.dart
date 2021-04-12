@@ -46,7 +46,7 @@ class SupervisorCheck {
       this.livingRoomCarpet,this.livingRoomConditioner,this.livingRoomCurtains,this.livingRoomTv,this.livingRoomWalls,this.livingRoomWindow);
 
   factory SupervisorCheck.fromJson(dynamic json) {
-    //var curdatetime = DateFormat.yMd().format(DateTime.now());
+
     return SupervisorCheck(
         "${json['room']}",
         "${json['datetime']}",
