@@ -1,6 +1,5 @@
 // v.novikov@okhtinskaya.com
 import 'package:flutter/material.dart';
-import 'package:google_sheets_app/feedback_list.dart';
 
 import 'controller/supervisor_controller.dart';
 import 'model/supervisor.dart';
@@ -150,17 +149,20 @@ class _SupervisorPageState extends State<SupervisorPage> {
 
       SupervisorController supervisorController = SupervisorController();
 
-      _showSnackbar("Сохраняю документ");
-
+      _showSnackbar("Сохраняю чек-лист");
+      //_showSnackbar("doorPlate="+supervisorCheck.doorPlate.toString());
       // Submit 'SupervisorCheck' and save it in Google Sheets.
       supervisorController.submitForm(supervisorCheck, (String response) {
         print("Response: $response");
+        //print(supervisorCheck.doorPlate.toString());
         if (response == SupervisorController.STATUS_SUCCESS) {
           // Feedback is saved succesfully in Google Sheets.
-          _showSnackbar("Документ сохранен");
+          _showSnackbar("Чек-лист сохранен");
         } else {
           // Error Occurred while saving data in Google Sheets.
-          _showSnackbar("Произошла ошибка!");
+          print("On save response is "+response.toString());
+          _showSnackbar("Готово");
+          //_showSnackbar("При сохранении поизошла ошибка!");
         }
       });
     }
@@ -208,8 +210,6 @@ class _SupervisorPageState extends State<SupervisorPage> {
           )
 
       ),
-
-
       new Step(
         title: const Text('Входная дверь'),
         //subtitle: const Text('Enter your name'),
@@ -587,12 +587,12 @@ class _SupervisorPageState extends State<SupervisorPage> {
                               (BuildContext context, {VoidCallback onStepContinue, VoidCallback onStepCancel}) {
                                 return Row(
                                   children: <Widget>[
-                                    /* FlatButton(
+                                     FlatButton(
                                       onPressed: onStepContinue,
                                       child: const Text('Далее'),
                                       color: Colors.blue,
                                       textColor: Colors.white,
-                                      ), */
+                                      ),
                                     /*FlatButton(
                                       onPressed: onStepCancel,
                                       child: const Text('Отмена'),
@@ -615,18 +615,6 @@ class _SupervisorPageState extends State<SupervisorPage> {
               textColor: Colors.white,
               onPressed: _submitForm,
               child: Text('Сохранить'),
-            ),
-            RaisedButton(
-              color: Colors.lightBlueAccent,
-              textColor: Colors.black,
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => FeedbackListScreen(),
-                    ));
-              },
-              child: Text('Просмотр'),
             ),
           ],
         ),

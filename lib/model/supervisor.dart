@@ -4,7 +4,7 @@ import 'dart:convert';
 /// FeedbackForm is a data class which stores data fields of Feedback.
 
 class SupervisorCheck {
-  String supervisor;
+  String room;
   String datetime = "2020-01-01";
   String feedback;
   // door area elements
@@ -38,7 +38,7 @@ class SupervisorCheck {
   String livingRoomCurtains;
   String livingRoomTv;
 
-  SupervisorCheck(this.supervisor,this.datetime,this.feedback,
+  SupervisorCheck(this.room,this.datetime,this.feedback,
       this.doorCarpet,this.doorPlate,this.doorKnob,this.doorLeaf,this.doorDoNotDisturb,
       this.passageBaseBoard,this.passageCarpet,this.passageCeiling,this.passageWalls,
       this.bathDoor,this.bathDrain,this.bathKnob,this.bathSink,this.bathTile,
@@ -48,7 +48,7 @@ class SupervisorCheck {
   factory SupervisorCheck.fromJson(dynamic json) {
     //var curdatetime = DateFormat.yMd().format(DateTime.now());
     return SupervisorCheck(
-        "${json['supervisor']}",
+        "${json['room']}",
         "${json['datetime']}",
         "${json['feedback']}",
 
@@ -87,40 +87,34 @@ class SupervisorCheck {
 
   // Method to make GET parameters.
   Map toJson() => {
-    'supervisor': supervisor,
+    'room': room,
     'datetime': datetime,
     'feedback': feedback,
-
     'doorCarpet':doorCarpet,
     'doorPlate':doorPlate,
     'doorKnob':doorKnob,
     'doorLeaf':doorLeaf,
     'doorDoNotDisturb':doorDoNotDisturb,
-
     'passageCarpet': passageCarpet,
     'passageBaseBoard':passageBaseBoard,
     'passageWalls': passageWalls,
     'passageCeiling': passageCeiling,
-
     'bathDoor': bathDoor,
     'bathKnob': bathKnob,
     'bathSink': bathSink,
     'bathDrain': bathDrain,
     'bathTile': bathTile,
-  
     'wardrobeShelves': wardrobeShelves,
     'wardrobeLaundryReceipt': wardrobeLaundryReceipt,
     'wardrobeShoeHorn': wardrobeShoeHorn,
     'wardrobeHangers': wardrobeHangers,
     'wardrobeLuggageRack': wardrobeLuggageRack,
-
     'livingRoomWalls': livingRoomWalls,
     'livingRoomConditioner': livingRoomConditioner,
     'livingRoomCarpet': livingRoomCarpet,
     'livingRoomWindow,': livingRoomWindow,
     'livingRoomCurtains': livingRoomCurtains,
     'livingRoomTv': livingRoomTv,
-
   };
 }
 
