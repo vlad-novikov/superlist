@@ -1,7 +1,7 @@
 // common side menu
 import 'package:flutter/material.dart';
+import 'package:google_sheets_app/tech_screen.dart';
 import 'package:google_sheets_app/main.dart';
-import 'package:google_sheets_app/supervisor_screen.dart';
 import 'package:google_sheets_app/feedback_list.dart';
 
 class DefaultDrawer extends StatelessWidget {
