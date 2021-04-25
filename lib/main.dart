@@ -85,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  // Method to show snackbar with 'message'.
+  // Method to show Snackbar with 'message'.
   _showSnackbar(String message) {
     final snackBar = SnackBar(content: Text(message));
     _scaffoldKey.currentState.showSnackBar(snackBar);

@@ -530,8 +530,9 @@ class _SupervisorPageState extends State<SupervisorPage> {
       ),
       drawer: DefaultDrawer(),
       body:  SingleChildScrollView(
-        child: Center(
+        //child: Center(
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             Form(
@@ -548,6 +549,7 @@ class _SupervisorPageState extends State<SupervisorPage> {
                             new Stepper(
                               steps: steps,
                               type: StepperType.vertical,
+                              physics : ClampingScrollPhysics(),
                               currentStep: this._currentStep,
                               onStepContinue: () {
                                 setState(() {
@@ -630,7 +632,7 @@ class _SupervisorPageState extends State<SupervisorPage> {
             ),
           ],
         ),
-      ),
+      //),
     ),
     );
   }
