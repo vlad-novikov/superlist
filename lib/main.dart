@@ -10,6 +10,8 @@ import 'package:flutter/services.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:intl/intl.dart';
 
+// set defaults
+
 bool _isChecked = false;
 
 // door area elements
@@ -102,7 +104,7 @@ class _SupervisorPageState extends State<SupervisorPage> {
   }
 
   // TextField Controllers
-  TextEditingController nameController = TextEditingController();
+  // TextEditingController nameController = TextEditingController();
   TextEditingController roomController = TextEditingController();
   TextEditingController datetimeController = TextEditingController();
   TextEditingController feedbackController = TextEditingController();
