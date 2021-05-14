@@ -136,18 +136,18 @@ class _SupervisorPageState extends State<SupervisorPage> {
        _bathDrain.toString(),
        _bathTile.toString(),
 // wardrobe area
+       _wardrobeHangers.toString(),
        _wardrobeShelves.toString(),
        _wardrobeLaundryReceipt.toString(),
        _wardrobeShoeHorn.toString(),
-       _wardrobeHangers.toString(),
        _wardrobeLuggageRack.toString(),
 // LivingRoom area elements
        _livingRoomWalls.toString(),
        _livingRoomConditioner.toString(),
        _livingRoomCarpet.toString(),
-       _livingRoomWindow.toString(),
+       _livingRoomTv.toString(),
        _livingRoomCurtains.toString(),
-       _livingRoomTv.toString()
+       _livingRoomWindow.toString()
       );
 
       SupervisorController supervisorController = SupervisorController();
