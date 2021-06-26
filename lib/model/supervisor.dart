@@ -5,6 +5,7 @@ import 'dart:convert';
 
 class SupervisorCheck {
   String room;
+  String name;
   String datetime = "2020-01-01";
   String feedback;
   // door area elements
@@ -38,7 +39,7 @@ class SupervisorCheck {
   String livingRoomCurtains;
   String livingRoomTv;
 
-  SupervisorCheck(this.room,this.datetime,this.feedback,
+  SupervisorCheck(this.room,this.name,this.datetime,this.feedback,
       this.doorCarpet,this.doorPlate,this.doorKnob,this.doorLeaf,this.doorDoNotDisturb,
       this.passageBaseBoard,this.passageCarpet,this.passageCeiling,this.passageWalls,
       this.bathDoor,this.bathDrain,this.bathKnob,this.bathSink,this.bathTile,
@@ -49,6 +50,7 @@ class SupervisorCheck {
     //var curdatetime = DateFormat.yMd().format(DateTime.now());
     return SupervisorCheck(
         "${json['room']}",
+        "${json['name']}",
         "${json['datetime']}",
         "${json['feedback']}",
 
@@ -88,6 +90,7 @@ class SupervisorCheck {
   // Method to make GET parameters.
   Map toJson() => {
     'room': room,
+    'name': name,
     'datetime': datetime,
     'feedback': feedback,
 

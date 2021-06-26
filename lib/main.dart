@@ -1,4 +1,5 @@
 // v.novikov@okhtinskaya.com
+// this is model of roomservice manager's check of room
 import 'package:flutter/material.dart';
 import 'package:google_sheets_app/feedback_list.dart';
 
@@ -104,8 +105,8 @@ class _SupervisorPageState extends State<SupervisorPage> {
   }
 
   // TextField Controllers
-  // TextEditingController nameController = TextEditingController();
   TextEditingController roomController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
   TextEditingController datetimeController = TextEditingController();
   TextEditingController feedbackController = TextEditingController();
 
@@ -117,6 +118,7 @@ class _SupervisorPageState extends State<SupervisorPage> {
       // If the form is valid, proceed.
       SupervisorCheck supervisorCheck = SupervisorCheck(
           roomController.text,
+          nameController.text,
           datetimeController.text,
           feedbackController.text,
           _doorCarpet.toString(),
@@ -202,9 +204,20 @@ class _SupervisorPageState extends State<SupervisorPage> {
                   decoration: InputDecoration(labelText: '№ комнаты'),
                 ),
                 TextFormField(
+                  controller: nameController,
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Горничная';
+                    }
+                    return null;
+                  },
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(labelText: 'Горничная'),
+                ),
+                TextFormField(
                   controller: feedbackController,
                   keyboardType: TextInputType.multiline,
-                  decoration: InputDecoration(labelText: 'Горничная'),
+                  decoration: InputDecoration(labelText: 'Примечание'),
                 ),
               ]
           )
