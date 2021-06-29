@@ -164,7 +164,7 @@ class _SupervisorPageState extends State<SupervisorPage> {
           _showSnackbar("Документ сохранен");
         } else {
           // Error Occurred while saving data in Google Sheets.
-          _showSnackbar("Произошла ошибка!");
+          _showSnackbar("Произошла ошибка! $response");
         }
       });
     }
