@@ -1,5 +1,5 @@
-import 'package:date_time_picker/date_time_picker.dart';
-import 'dart:convert';
+//import 'package:date_time_picker/date_time_picker.dart';
+//import 'dart:convert';
 
 /// FeedbackForm is a data class which stores data fields of Feedback.
 
@@ -47,7 +47,7 @@ class SupervisorCheck {
       this.livingRoomCarpet,this.livingRoomConditioner,this.livingRoomCurtains,this.livingRoomTv,this.livingRoomWalls,this.livingRoomWindow);
 
   factory SupervisorCheck.fromJson(dynamic json) {
-    //var curdatetime = DateFormat.yMd().format(DateTime.now());
+    //var curDateTime = DateFormat.yMd().format(DateTime.now());
     return SupervisorCheck(
         "${json['room']}",
         "${json['name']}",

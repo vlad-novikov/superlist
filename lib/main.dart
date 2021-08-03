@@ -207,12 +207,12 @@ class _SupervisorPageState extends State<SupervisorPage> {
                   controller: nameController,
                   validator: (value) {
                     if (value.isEmpty) {
-                      return 'Горничная';
+                      return 'Фамилия Имя Отчество';
                     }
                     return null;
                   },
                   keyboardType: TextInputType.text,
-                  decoration: InputDecoration(labelText: 'Горничная'),
+                  decoration: InputDecoration(labelText: 'Фамилия'),
                 ),
                 TextFormField(
                   controller: feedbackController,

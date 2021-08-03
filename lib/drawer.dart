@@ -30,7 +30,7 @@ class DefaultDrawer extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => TechScreen(),
+                    builder: (context) => TechnicianScreen(),
                   ));
             },
           ),
