@@ -448,18 +448,6 @@ class _TechnicianPageState extends State<TechnicianPage> {
               onPressed: _submitForm,
               child: Text('Сохранить'),
             ),
-            RaisedButton(
-              color: Colors.lightBlueAccent,
-              textColor: Colors.black,
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => FeedbackListScreen(),
-                    ));
-              },
-              child: Text('Просмотр'),
-            ),
           ],
         ),
         //),

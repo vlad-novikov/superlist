@@ -633,7 +633,7 @@ class _SupervisorPageState extends State<SupervisorPage> {
               onPressed: _submitForm,
               child: Text('Сохранить'),
             ),
-            RaisedButton(
+            /*RaisedButton(
               color: Colors.lightBlueAccent,
               textColor: Colors.black,
               onPressed: () {
@@ -644,7 +644,7 @@ class _SupervisorPageState extends State<SupervisorPage> {
                     ));
               },
               child: Text('Просмотр'),
-            ),
+            ),*/
           ],
         ),
       //),

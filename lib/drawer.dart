@@ -46,7 +46,7 @@ class DefaultDrawer extends StatelessWidget {
             },
 
           ),
-          ListTile(
+          /*ListTile(
             leading: Icon(Icons.view_list),
             title: Text('Просмотр чеков'),
 
@@ -60,7 +60,7 @@ class DefaultDrawer extends StatelessWidget {
                   ));
             },
 
-          ),
+          ),*/
         ],
       ),
     );

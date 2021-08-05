@@ -32,19 +32,19 @@ class SupervisorCheck {
   String wardrobeHangers;
   String wardrobeLuggageRack;
   // LivingRoom area elements
-  String livingRoomWalls;
-  String livingRoomConditioner;
   String livingRoomCarpet;
-  String livingRoomWindow;
-  String livingRoomCurtains;
+  String livingRoomConditioner;
   String livingRoomTv;
+  String livingRoomWalls;
+  String livingRoomCurtains;
+  String livingRoomWindow;
 
   SupervisorCheck(this.room,this.name,this.datetime,this.feedback,
       this.doorCarpet,this.doorPlate,this.doorKnob,this.doorLeaf,this.doorDoNotDisturb,
       this.passageBaseBoard,this.passageCarpet,this.passageCeiling,this.passageWalls,
       this.bathDoor,this.bathDrain,this.bathKnob,this.bathSink,this.bathTile,
       this.wardrobeHangers,this.wardrobeLaundryReceipt,this.wardrobeLuggageRack,this.wardrobeShelves,this.wardrobeShoeHorn,
-      this.livingRoomCarpet,this.livingRoomConditioner,this.livingRoomCurtains,this.livingRoomTv,this.livingRoomWalls,this.livingRoomWindow);
+      this.livingRoomCarpet,this.livingRoomConditioner,this.livingRoomTv,this.livingRoomWalls,this.livingRoomCurtains,this.livingRoomWindow);
 
   factory SupervisorCheck.fromJson(dynamic json) {
     //var curDateTime = DateFormat.yMd().format(DateTime.now());
@@ -79,11 +79,10 @@ class SupervisorCheck {
 
         "${json['livingRoomCarpet']}",
         "${json['livingRoomConditioner']}",
-        "${json['livingRoomCurtains']}",
         "${json['livingRoomTv']}",
         "${json['livingRoomWalls']}",
+        "${json['livingRoomCurtains']}",
         "${json['livingRoomWindow']}"
-
     );
   }
 
@@ -117,13 +116,12 @@ class SupervisorCheck {
     'wardrobeHangers': wardrobeHangers,
     'wardrobeLuggageRack': wardrobeLuggageRack,
 
-    'livingRoomWalls': livingRoomWalls,
-    'livingRoomConditioner': livingRoomConditioner,
     'livingRoomCarpet': livingRoomCarpet,
-    'livingRoomWindow,': livingRoomWindow,
-    'livingRoomCurtains': livingRoomCurtains,
+    'livingRoomConditioner': livingRoomConditioner,
     'livingRoomTv': livingRoomTv,
-
+    'livingRoomWalls': livingRoomWalls,
+    'livingRoomCurtains': livingRoomCurtains,
+    'livingRoomWindow': livingRoomWindow
   };
 }
 

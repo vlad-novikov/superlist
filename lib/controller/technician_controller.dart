@@ -9,7 +9,7 @@ import '../model/technician.dart';
 class TechnicianController {
   // Google App Script Web URL.
   static const String URL =
-      "https://script.google.com/macros/s/AKfycbwC4o0kpJHod5bNlZsJ32YhxRwp--pUAjzfy0t1fRvHEwxAzPiqNGZPAhTtxtXiqzel/exec";
+      "https://script.google.com/macros/s/AKfycbxNc8B3AYCgTGHuS4PVOOiWUBBq4BzZ15ugAUE80N6uF8Y0I4a1IwGGDzjpbkxxFAjZEg/exec";
       //"https://script.google.com/macros/s/AKfycbz0wByXqQT0eD8nJja9CjTM5q-HGiao_DCapi1JblMv9bPbk6rQQB3xwh8bRaRKkcfc/exec";
       // sheet in novikov's acc "https://script.google.com/macros/s/AKfycbw7zu3J0U0m5MiuGZU4J5cUG4fgQfEb5kkD5-LqRNivn2FbUjwx/exec";
 
